@@ -541,9 +541,9 @@ Command.prototype.executeSubCommand = function(argv, args, unknown) {
   proc.on('close', process.exit.bind(process));
   proc.on('error', function(err) {
     if (err.code == "ENOENT") {
-      console.error('\n  %s(1) does not exist, try --help\n', bin);
+      console.error('\u001b[31m \n  %s(1) does not exist, try --help\n \u001b[37m', bin);
     } else if (err.code == "EACCES") {
-      console.error('\n  %s(1) not executable. try chmod or run with root\n', bin);
+      console.error('\u001b[31m \n  %s(1) not executable. try chmod or run with root\n \u001b[37m', bin);
     }
     process.exit(1);
   });
@@ -750,7 +750,7 @@ Command.prototype.opts = function() {
 
 Command.prototype.missingArgument = function(name) {
   console.error();
-  console.error("  error: missing required argument `%s'", name);
+  console.error("\u001b[31m  error: missing required argument `%s'b\u001b[37m", name);
   console.error();
   process.exit(1);
 };
@@ -766,9 +766,9 @@ Command.prototype.missingArgument = function(name) {
 Command.prototype.optionMissingArgument = function(option, flag) {
   console.error();
   if (flag) {
-    console.error("  error: option `%s' argument missing, got `%s'", option.flags, flag);
+    console.error("\u001b[31m  error: option `%s' argument missing, got `%s' \u001b[37m", option.flags, flag);
   } else {
-    console.error("  error: option `%s' argument missing", option.flags);
+    console.error("\u001b[31m  error: option `%s' argument missing \u001b[37m", option.flags);
   }
   console.error();
   process.exit(1);
@@ -784,7 +784,7 @@ Command.prototype.optionMissingArgument = function(option, flag) {
 Command.prototype.unknownOption = function(flag) {
   if (this._allowUnknownOption) return;
   console.error();
-  console.error("  error: unknown option `%s'", flag);
+  console.error("\u001b[31m  error: unknown option `%s' \u001b[37m", flag);
   console.error();
   process.exit(1);
 };
@@ -798,7 +798,7 @@ Command.prototype.unknownOption = function(flag) {
 
 Command.prototype.variadicArgNotLast = function(name) {
   console.error();
-  console.error("  error: variadic arguments must be last `%s'", name);
+  console.error("\u001b[31m  error: variadic arguments must be last `%s' \u001b[37m", name);
   console.error();
   process.exit(1);
 };
@@ -1107,4 +1107,3 @@ function exists(file) {
     return false;
   }
 }
-
